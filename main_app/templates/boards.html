@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block body %}
+  <div id = 'page_title'>
+    <h2>All Boards:</h2>
+  </div>
+  {% for board in boards %}
+    <div id = 'board'>
+      <a href = '{{ url_for("main_app.sub_boards", board_name = board["name"]) }}'><h4>{{ board['name'] }}</h4></a>
+      <p>{{ board['description'] }}</p>
+      {% if 'official' in board %}
+        <small>Official Board</small>
+      {% endif %}
+    </div>
+  {% endfor %}
+{% endblock %}

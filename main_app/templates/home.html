@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block body %}
+  <div id = 'page_title'>
+    <h2>Home</h2>
+  </div>
+  <div id = 'home_content'>
+    <div id = 'side_bar'>
+      <ul>
+        <li><a href = '{{ url_for("main_app.boards") }}'>All Boards</a></li>
+      </ul>
+    </div>
+    <div id = 'home_content_posts'>
+    </div>
+  </div>
+{% endblock %}

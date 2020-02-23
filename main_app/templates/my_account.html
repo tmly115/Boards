@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block body %}
+  <div id = 'page_title'>
+    <h2>My Account</h2>
+  </div>
+  <h3>Account Settings</h3>
+  <ul>
+    <li><a href = '{{ url_for("user_managment.change_username_and_password") }}'>Change Username or Password</a></li>
+{% endblock %}

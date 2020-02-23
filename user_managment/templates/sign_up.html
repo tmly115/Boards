@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block body %}
+  <h3>Sign Up to Boards</h3>
+  <form method = 'POST'>
+    <p>Username: <input type = 'text' name = 'username' required></p>
+    <p>Full Name: <input type = 'text' name = 'full_name' required></p>
+    <p>Email: <input type = 'text' name = 'email' required></p>
+    <p>Retype Email: <input type = 'text' name = 'retyped_email' required></p>
+    <p>Password: <input type = 'password' name = 'password' required></p>
+    <p>Retype Password: <input type = 'password' name = 'retyped_password' required></p>
+    <input type = 'submit' value = 'Sign Up'>
+  </form>
+  <p class = 'error'>{{ error_description }}</p>
+  <small><a href = '{{ url_for("user_managment.login") }}'>Log In</a></small>
+{% endblock %}

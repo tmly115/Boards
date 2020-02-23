@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block body %}
+  <p>
+    <a href = '{{ url_for("main_app.boards") }}'>All Boards</a> /
+    <a href = '{{ url_for("main_app.sub_boards", board_name = board["name"]) }}'>{{ board['name'] }}</a> /
+    <a href = '{{ url_for("main_app.posts", board_name = board["name"], sub_board_name = sub_board["name"]) }}'>{{ sub_board['name'] }}</a>
+  </p>
+
+  <div class = 'detailed_post'>
+    <h3>{{ post['title'] }}</h3>
+    <small>
+      Posted by:
+      <a href = '{{ url_for("main_app.view_profile", user_id = post["owner_id"]) }}'>
+        {{ db.get_profile_by_user_id(post['owner_id'])['profile_name'] }}
+      </a>
+      at {{ post['date_posted'] }}
+    </small>
+    {% if post['type'] == 0 %}
+      <p>{{ post['content'] }}</p>
+    {% elif post['type'] == 1%}
+      <p>{{ post['content']|safe }}</p>
+    {% endif %}
+    <ul>
+      {% if user %}
+        {% if db.get_like_by_post_id_and_user_id(post['id'], user['id']) %}
+          <li><a href = ''>Liked</a></li>
+        {% else %}
+          <li><a href = '{{ url_for("main_app.like_post", post_id = post["id"]) }}'>Like</a></li>
+        {% endif %}
+        <li><a href = '{{ url_for("main_app.create_comment", post_id = post["id"]) }}'>Comment</a></li>
+        {% if post['owner_id'] == user['id'] %}
+          {% if post['type'] == 0 %}
+            <li><a href = '{{ url_for("main_app.edit_post", post_id = post["id"]) }}'>Edit</a></li>
+          {% endif %}
+          <li><a href = '{{ url_for("main_app.delete_post", post_id = post["id"])}}'>Delete</a></li>
+        {% endif %}
+      {% endif %}
+    </ul>
+  </div>
+
+  <div class = 'comments'>
+    {% if comments %}
+      {% for comment in comments %}
+        <div id = 'comment'>
+          <small>
+            Comment Posted by:
+            <a href = '{{ url_for("main_app.view_profile", user_id = comment["owner_id"]) }}'>
+              {{ db.get_profile_by_user_id(comment['owner_id'])['profile_name'] }}
+            </a>
+            at {{ comment['date_posted'] }}
+          </small>
+          <p>{{ comment['comment'] }}</p>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>There are no comments to show at this time.</h5>
+    {% endif %}
+  </div>
+{% endblock %}

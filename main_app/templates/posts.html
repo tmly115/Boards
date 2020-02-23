@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block body %}
+  <p>
+    <a href = '{{ url_for("main_app.boards") }}'>All Boards</a> /
+    <a href = '{{ url_for("main_app.sub_boards", board_name = board["name"]) }}'>{{ board['name'] }}</a>
+  </p>
+  <div id = 'page_title'>
+    <h2>{{ sub_board['name'] }}</h2>
+  </div>
+  <ul>
+    <li>{{ sub_board['description'] }}</li>
+    <li>
+      <a href = '{{ url_for("main_app.create_post", board_name = board["name"], sub_board_name = sub_board["name"]) }}'>
+        Create Post
+      </a>
+    </li>
+  </ul>
+  {% if posts %}
+    {% for post in posts %}
+      <div id = 'post'>
+        <small>
+          Posted by:
+          <a href = '{{ url_for("main_app.view_profile", user_id = post["owner_id"]) }}'>
+            {{ db.get_profile_by_user_id(post['owner_id'])['profile_name'] }}
+          </a>
+          at {{ post['date_posted'] }}
+        </small>
+        <a href = '{{ url_for("main_app.post", board_name = board["name"], sub_board_name = sub_board["name"], post_id = post["id"]) }}'>
+          <h4>{{ post['title'] }}</h4>
+        </a>
+        <p>{{ post['content'][:80] + '...' }}</p>
+        <p>Score: {{ post['boards_score'] }}</p>
+      </div>
+    {% endfor %}
+  {% else %}
+    <h4>There are no posts in this Sub Board yet.</h4>
+  {% endif %}
+{% endblock %}

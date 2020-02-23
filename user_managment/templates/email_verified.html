@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block body %}
+  <h3>Email Verified</h3>
+  <p>
+    Your email has been verified therefore your account has been activated. You can now log on to boards and
+    post, comment and earn board points. You can now <a href = '{{ url_for("user_managment.login") }}'>login</a>
+    and setup your profile.
+  </p>
+{% endblock %}

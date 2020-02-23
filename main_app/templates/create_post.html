@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block body %}
+  <div id = 'page_title'>
+    <h2>Create Link for {{ sub_board['name'] }} - {{ board['name'] }}<h2>
+  </div>
+  <ul>
+    <li><a href = '{{ url_for("main_app.create_text_post", board_name = board["name"], sub_board_name = sub_board["name"]) }}'>Post Text</a></li>
+    <li><a href = '{{ url_for("main_app.create_image_post", board_name = board["name"], sub_board_name = sub_board["name"]) }}'>Post Picture</a></li>
+    <li><a href = '{{ url_for("main_app.create_link_post", board_name = board["name"], sub_board_name = sub_board["name"]) }}'>Post Link</a></li>
+  </ul>
+{% endblock %}

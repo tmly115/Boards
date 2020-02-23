@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block body %}
+  <div id = 'page_title'>
+    <h2>Edit Post - {{ post['title'] }}</h2>
+  </div>
+  {% if post['type'] == 0 %}
+    <form method = 'POST'>
+      <p>Post Content:</p>
+      <textarea name = 'content' rows = '8' cols = '80'>{{ post["content"] }}</textarea>
+      <p><input type = 'submit' value = 'Save'></p>
+    </form>
+  {% else %}
+    <p>You can't edit this type of post</p>
+  {% endif %}
+{% endblock %}

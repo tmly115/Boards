@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block body %}
+  <h3>Create Link Post for: {{ sub_board['name'] }} - {{ board['name'] }}</h3>
+  <form method = 'POST'>
+    <p>Post Title: <input type = 'text' name = 'title' required></p>
+    <p>Post Link: <input type = 'text' name = 'link' required></p>
+    <input type = 'submit' value = 'Create Post'>
+    <p>{{ error_description }}</p>
+  </form>
+{% endblock %}
